@@ -4,7 +4,7 @@
   </hidden>
   <textbox>
     <ctrl update="save">os_reports</ctrl>
-    <name update="save">OS_Reports</name>
+    <name update="save">Reports</name>
     <icon update="save" />
     <group update="save">Admin</group>
     <path update="save">/DesktopModules/NBright/OS_Reports/Admin.ascx</path>

@@ -2,6 +2,7 @@
 @using System.Globalization
 @using NBrightDNN
 @using NBrightCore.common
+@using DotNetNuke.Entities.Users;
 
 @AddMetaData("resourcepath", "/DesktopModules/NBright/NBrightBuy/App_LocalResources/")
 @AddMetaData("resourcepath", "/DesktopModules/NBright/OS_Reports/App_LocalResources/")
@@ -50,9 +51,12 @@
         </a>
         <div class="actionbuttonwrapper">
 
-            <button id="cmdsave" type="button" class="btn btn-primary" style="display: none;">@ResourceKey("General.cmdSaveButton")</button>
-            <button id="addnew" type="button" class="btn btn-primary" style="display: none;">@ResourceKey("General.cmdAddButton")</button>
-            <button id="cmddelete" type="button" class="btn btn-danger" style="display: none;">@ResourceKey("General.cmdDeleteButton")</button>
+            @if (UserController.Instance.GetCurrentUserInfo().IsSuperUser)
+            {
+                <button id="cmdsave" type="button" class="btn btn-primary" style="display: none;">@ResourceKey("General.cmdSaveButton")</button>
+                <button id="addnew" type="button" class="btn btn-primary" style="display: none;">@ResourceKey("General.cmdAddButton")</button>
+                <button id="cmddelete" type="button" class="btn btn-danger" style="display: none;">@ResourceKey("General.cmdDeleteButton")</button>
+            }
             <button id="cmdreturn" type="button" class="btn btn-default" style="display: none;">@ResourceKey("General.cmdReturnButton")</button>
             <button id="cmdRun" type="button" class="btn btn-primary" style="display: none;">@ResourceKey("Admin.runreport")</button>
 

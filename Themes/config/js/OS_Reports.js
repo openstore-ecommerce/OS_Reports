@@ -105,6 +105,7 @@ function nbxgetCompleted(e) {
 
         $('.rundisplay').unbind();
         $('.rundisplay').click(function () {
+            OS_Reports_RunButtons();
             $('.processing').show();
             $('#selecteditemid').val($(this).attr("itemid")); // assign the selected itemid, so the server knows what item is being edited
             $('#rundisplay').val('true');
@@ -118,15 +119,13 @@ function nbxgetCompleted(e) {
     // check if we are displaying a list or the detail and do processing.
     if (($('#selecteditemid').val() !== '') || (e.cmd === 'os_reports_addnew')) {
         // PROCESS DETAIL
-        OS_Reports_DetailButtons();
-
-        $('.processing').hide(); 
-
+        $('.processing').hide();
     } else {
         //PROCESS LIST
         OS_Reports_ListButtons();
         $('.edititem').unbind('click');
         $('.edititem').click(function () {
+            OS_Reports_DetailButtons();
             $('.processing').show();
             $('#selecteditemid').val($(this).attr("itemid")); // assign the sleected itemid, so the server knows what item is being edited
             nbxget('os_reports_getdata', '#selectparams', '#editdata'); // do ajax call to get edit form
@@ -153,4 +152,10 @@ function OS_Reports_ListButtons() {
     $('#addnew').show();
 }
 
+function OS_Reports_RunButtons() {
+    $('#cmdsave').hide();
+    $('#cmddelete').hide();
+    $('#cmdreturn').show();
+    $('#addnew').hide();
+}
 

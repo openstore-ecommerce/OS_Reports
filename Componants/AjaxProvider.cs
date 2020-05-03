@@ -50,16 +50,28 @@ namespace OpenStore.Providers.OS_Reports
                     strOut = GetData(context);
                     break;
                 case "os_reports_addnew":
-                    strOut = GetData(context, true);
+                    if (UserController.Instance.GetCurrentUserInfo().IsSuperUser)
+                    {
+                        strOut = GetData(context, true);
+                    }
                     break;
                 case "os_reports_deleterecord":
-                    strOut = DeleteData(context);
+                    if (UserController.Instance.GetCurrentUserInfo().IsSuperUser)
+                    {
+                        strOut = DeleteData(context);
+                    }
                     break;
                 case "os_reports_savedata":
-                    strOut = SaveData(context);
+                    if (UserController.Instance.GetCurrentUserInfo().IsSuperUser)
+                    {
+                        strOut = SaveData(context);
+                    }
                     break;
                 case "os_reports_selectlang":
-                    strOut = SaveData(context);
+                    if (UserController.Instance.GetCurrentUserInfo().IsSuperUser)
+                    {
+                        strOut = SaveData(context);
+                    }
                     break;
                 case "os_reports_rundisplay":
                     strOut = GetData(context);
@@ -142,8 +154,8 @@ namespace OpenStore.Providers.OS_Reports
 
 
                 // Return list of items
-                var l = objCtrl.GetDataList(PortalSettings.Current.PortalId, Convert.ToInt32(moduleid), typeCode, typeCode + "LANG", editlang, filter, " order by [XMLData].value('(genxml/textbox/ref)[1]','nvarchar(50)')", false,"", 0, pagenumber, pagesize, recordcount);
-                strOut = NBrightBuyUtils.RazorTemplRenderList("datalist.cshtml", Convert.ToInt32(moduleid), editlang, l, templateControl, "config", editlang, StoreSettings.Current.Settings());
+                var l = objCtrl.GetDataList(PortalSettings.Current.PortalId, Convert.ToInt32(moduleid), typeCode, typeCode + "LANG", editlang, filter, " order by [XMLData].value('(genxml/textbox/ref)[1]','nvarchar(50)')", true,"", 0, pagenumber, pagesize, recordcount);
+                strOut = NBrightBuyUtils.RazorTemplRenderList("datalist.cshtml", Convert.ToInt32(moduleid), "", l, templateControl, "config", editlang, StoreSettings.Current.Settings());
 
                 if (recordcount > pagesize)
                 {
